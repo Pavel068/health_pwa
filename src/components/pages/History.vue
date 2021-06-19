@@ -26,8 +26,28 @@
 </template>
 
 <script>
+import common from "@/mixins/common";
+import axios from 'axios';
+
 export default {
-  name: "Chat"
+  name: "Chat",
+  mixins: [common],
+  data() {
+    return {
+      history: null,
+    }
+  },
+  methods: {
+    async loadHistory() {
+      const {data} = await axios.get(this.env.VUE_APP_API_HOST + '/api/history');
+      if (data) {
+        this.history = data;
+      }
+    }
+  },
+  async mounted() {
+    await this.loadHistory();
+  }
 }
 </script>
 

@@ -68,3 +68,7 @@ form > .form-group:not(:nth-child(1)) {
 h2 {
     margin-bottom: 40px;
 }
+
+button:disabled {
+    background-color: #bebebe;
+}
