@@ -23,6 +23,7 @@
 <script>
 import common from "@/mixins/common";
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 export default {
   name: "Signin",
@@ -41,9 +42,10 @@ export default {
       event.preventDefault();
       this.error = false;
 
-      const {data} = await axios.post(this.env.VUE_APP_API_HOST + '/api/login', this.form);
+      const {data} = await axios.post(this.env.VUE_APP_API_HOST + '/api/auth/login', this.form);
 
       if (data) {
+        Cookies.set('access_token', data.access_token);
         await this.$router.push({name: 'Home'});
       } else {
         this.error = true;

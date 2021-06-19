@@ -7,14 +7,18 @@
     </div>
     <br/>
     <div class="buttons">
-      <router-link :to="{name: 'Signin'}">Войти в систему</router-link>
+      <router-link v-if="!isAuth" :to="{name: 'Signin'}">Войти в систему</router-link>
+      <router-link v-if="isAuth" :to="{name: 'Checkout'}">Отправить данные</router-link>
     </div>
   </div>
 </template>
 
 <script>
+import common from "@/mixins/common";
+
 export default {
-  name: "Index"
+  name: "Index",
+  mixins: [common]
 }
 </script>
 

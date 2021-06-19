@@ -1,7 +1,7 @@
 <template>
   <div class="nav-top">
     <h1>
-      <img src="img/heart.png" alt="Dr.House" class="logo">
+      <img src="/dist/img/heart.png" alt="Dr.House" class="logo">
       <span>Dr.House</span>
     </h1>
     <Slide right :closeOnNavigation="true" noOverlay>

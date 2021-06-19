@@ -48,7 +48,11 @@ export default {
     async sendData(event) {
       event.preventDefault();
 
-      const {data} = await axios.post(this.env.VUE_APP_API_HOST + '/api/observations/create');
+      const {data} = await axios.post(this.env.VUE_APP_API_HOST + '/api/observations/create', this.form,{
+        headers: {
+          ...this.headers
+        }
+      });
 
       if (data) {
         await this.$router.push({name: 'CheckoutCompleted'});

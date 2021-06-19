@@ -1,26 +1,12 @@
 <template>
   <div class="content">
     <h2>История назначений</h2>
-    <div class="block">
+    <div class="block" v-for="item in history" v-bind:key="item.id">
       <div class="header">
-        <div class="user">Иванов А.А.</div>
-        <div class="date">01.01.2020</div>
+        <div class="user">{{ item }}</div>
+        <div class="date">{{ item.created_at }}</div>
       </div>
-      <div class="message">Анальгин 1 таблетка 2 раза в сутки</div>
-    </div>
-    <div class="block">
-      <div class="header">
-        <div class="user">Иванов А.А.</div>
-        <div class="date">01.01.2020</div>
-      </div>
-      <div class="message">Анальгин 1 таблетка 2 раза в сутки</div>
-    </div>
-    <div class="block">
-      <div class="header">
-        <div class="user">Иванов А.А.</div>
-        <div class="date">01.01.2020</div>
-      </div>
-      <div class="message">Анальгин 1 таблетка 2 раза в сутки</div>
+      <div class="message"><b>{{ item.drug }}</b>: {{ item.drug_meta }}</div>
     </div>
   </div>
 </template>
@@ -39,9 +25,15 @@ export default {
   },
   methods: {
     async loadHistory() {
-      const {data} = await axios.get(this.env.VUE_APP_API_HOST + '/api/history');
+      const {data} = await axios.get(this.env.VUE_APP_API_HOST + '/api/history', {
+        params: {
+          page: 1,
+          per_page: 100
+        }
+      });
+
       if (data) {
-        this.history = data;
+        this.history = data.items;
       }
     }
   },
